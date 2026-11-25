@@ -32,7 +32,7 @@ const formatRupiah = (amount) => {
             <div class="bg-white rounded-xl border border-slate-200 p-6">
                 <h3 class="text-lg font-bold text-slate-900">Assalamu'alaikum, {{ user.name }}</h3>
                 <p class="text-sm text-slate-600 mt-1">
-                    Anda login sebagai <strong class="uppercase text-[#008B45]">{{ user.role === 'super_admin' ? 'Super Admin' : 'Admin (Ketua & Takmir)' }}</strong>.
+                    Anda login sebagai <strong class="uppercase text-[#008B45]">{{ user.role === 'super_admin' ? 'Ketua Takmir' : 'Jamaah' }}</strong>.
                 </p>
             </div>
 

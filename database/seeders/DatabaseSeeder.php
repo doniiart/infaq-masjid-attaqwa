@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $superAdmin = User::updateOrCreate(
             ['email' => 'superadmin@masjidattaqwa.id'],
             [
-                'name' => 'Super Admin Masjid At-Taqwa',
+                'name' => 'Ketua Takmir Masjid At-Taqwa',
                 'password' => Hash::make('Password123!'),
                 'role' => 'super_admin',
                 'is_active' => true,
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@masjidattaqwa.id'],
             [
-                'name' => 'Pengurus Takmir Masjid At-Taqwa',
+                'name' => 'Jamaah Masjid At-Taqwa',
                 'password' => Hash::make('Password123!'),
                 'role' => 'admin',
                 'is_active' => true,
