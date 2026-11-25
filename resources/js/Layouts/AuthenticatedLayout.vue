@@ -100,8 +100,20 @@ const sidebarOpen = ref(false);
                     <div class="pt-4 pb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
                         Administrasi Sistem
                     </div>
-                    <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Manajemen Pengguna (Fase 7)</span>
-                    <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Profil Masjid (Fase 7)</span>
+                    <Link
+                        :href="route('users.index')"
+                        :class="route().current('users.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                        class="flex items-center px-3 py-2.5 rounded-lg transition"
+                    >
+                        Manajemen Pengguna
+                    </Link>
+                    <Link
+                        :href="route('mosque-settings.edit')"
+                        :class="route().current('mosque-settings.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                        class="flex items-center px-3 py-2.5 rounded-lg transition"
+                    >
+                        Profil Masjid
+                    </Link>
                     <Link
                         :href="route('activity-logs.index')"
                         :class="route().current('activity-logs.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"

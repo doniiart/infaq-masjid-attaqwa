@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\FinancialReportController;
 use App\Http\Controllers\ConstructionProgressController;
+use App\Http\Controllers\MosqueSettingController;
+use App\Http\Controllers\UserManagementController;
 
 Route::get('/', [PublicDashboardController::class, 'index'])->name('home');
 Route::get('/attachments/{attachment}', [TransactionAttachmentController::class, 'show'])->name('attachments.show');
@@ -67,6 +69,17 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::post('/construction/documents/{document}/update', [ConstructionProgressController::class, 'updateDocument'])->name('construction.documents.update');
     Route::delete('/construction/photos/{photo}', [ConstructionProgressController::class, 'destroyPhoto'])->name('construction.photos.destroy');
     Route::delete('/construction/documents/{document}', [ConstructionProgressController::class, 'destroyDocument'])->name('construction.documents.destroy');
+    
+    // Manajemen Pengguna & Profil Masjid (Khusus Super Admin)
+    Route::middleware('role:super_admin')->group(function () {
+        Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
+        Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');
+        Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
+        Route::patch('/users/{user}/toggle-status', [UserManagementController::class, 'toggleStatus'])->name('users.toggle-status');
+
+        Route::get('/mosque-settings', [MosqueSettingController::class, 'edit'])->name('mosque-settings.edit');
+        Route::post('/mosque-settings', [MosqueSettingController::class, 'update'])->name('mosque-settings.update');
+    });
 });
 
 require __DIR__.'/auth.php';
