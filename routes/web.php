@@ -11,9 +11,11 @@ use App\Http\Controllers\TransactionHistoryController;
 use App\Services\FinancialSummaryService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\FinancialReportController;
 
 Route::get('/', [PublicDashboardController::class, 'index'])->name('home');
 Route::get('/attachments/{attachment}', [TransactionAttachmentController::class, 'show'])->name('attachments.show');
+Route::get('/reports/pdf', [FinancialReportController::class, 'downloadPdf'])->name('reports.pdf');
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/dashboard', function (FinancialSummaryService $financialService) {
@@ -51,6 +53,8 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Laporan Keuangan PDF
+    Route::get('/reports', [FinancialReportController::class, 'index'])->name('reports.index');
 });
 
 require __DIR__.'/auth.php';

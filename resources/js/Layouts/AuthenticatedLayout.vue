@@ -78,8 +78,8 @@ const sidebarOpen = ref(false);
                     Riwayat Transaksi
                 </Link>
                 <Link
-                    :href="route('reports.pdf')"
-                    :class="route().current('reports.pdf') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    :href="route('reports.index')"
+                    :class="route().current('reports.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
                     class="flex items-center px-3 py-2.5 rounded-lg transition"
                 >
                     Laporan PDF

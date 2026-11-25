@@ -246,6 +246,21 @@ const openDocumentModal = (doc) => {
                             Catatan pemasukan dan pengeluaran yang telah terverifikasi. Nama donatur yang dirahasiakan ditampilkan sebagai <strong>Hamba Allah</strong>.
                         </p>
                     </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <a
+                            :href="route('reports.pdf', { period_type: 'weekly' })"
+                            class="px-3.5 py-2 rounded-lg border border-[#008B45] text-[#008B45] text-xs font-semibold hover:bg-emerald-50 transition"
+                        >
+                            Unduh PDF Mingguan
+                        </a>
+                        <a
+                            :href="route('reports.pdf', { period_type: 'monthly' })"
+                            class="px-4 py-2 rounded-lg bg-[#008B45] text-white text-xs font-semibold hover:bg-[#007037] transition"
+                        >
+                            Unduh PDF Bulanan
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Filter Bar -->
