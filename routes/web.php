@@ -15,6 +15,7 @@ use App\Http\Controllers\FinancialReportController;
 use App\Http\Controllers\ConstructionProgressController;
 use App\Http\Controllers\MosqueSettingController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\DatabaseBackupController;
 
 Route::get('/', [PublicDashboardController::class, 'index'])->name('home');
 Route::get('/attachments/{attachment}', [TransactionAttachmentController::class, 'show'])->name('attachments.show');
@@ -79,6 +80,15 @@ Route::middleware(['auth', 'active'])->group(function () {
 
         Route::get('/mosque-settings', [MosqueSettingController::class, 'edit'])->name('mosque-settings.edit');
         Route::post('/mosque-settings', [MosqueSettingController::class, 'update'])->name('mosque-settings.update');
+
+        // Backup & Restore Database
+        Route::get('/backups', [DatabaseBackupController::class, 'index'])->name('backups.index');
+        Route::post('/backups', [DatabaseBackupController::class, 'store'])->name('backups.store');
+        Route::post('/backups/{backupLog}/verify', [DatabaseBackupController::class, 'verify'])->name('backups.verify');
+        Route::get('/backups/{backupLog}/download', [DatabaseBackupController::class, 'download'])->name('backups.download');
+        Route::post('/backups/{backupLog}/restore', [DatabaseBackupController::class, 'restoreFromLog'])->name('backups.restore-log');
+        Route::post('/backups/restore-upload', [DatabaseBackupController::class, 'restoreFromUpload'])->name('backups.restore-upload');
+        Route::delete('/backups/{backupLog}', [DatabaseBackupController::class, 'destroy'])->name('backups.destroy');
     });
 });
 

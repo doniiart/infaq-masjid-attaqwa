@@ -121,7 +121,13 @@ const sidebarOpen = ref(false);
                     >
                         Log Aktivitas
                     </Link>
-                    <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Backup Database (Fase 8)</span>
+                    <Link
+                        :href="route('backups.index')"
+                        :class="route().current('backups.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                        class="flex items-center px-3 py-2.5 rounded-lg transition"
+                    >
+                        Backup & Restore
+                    </Link>
                 </template>
             </nav>
 
