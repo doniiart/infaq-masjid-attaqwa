@@ -96,7 +96,13 @@ const sidebarOpen = ref(false);
                     </div>
                     <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Manajemen Pengguna (Fase 7)</span>
                     <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Profil Masjid (Fase 7)</span>
-                    <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Log Aktivitas (Fase 4)</span>
+                    <Link
+                        :href="route('activity-logs.index')"
+                        :class="route().current('activity-logs.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                        class="flex items-center px-3 py-2.5 rounded-lg transition"
+                    >
+                        Log Aktivitas
+                    </Link>
                     <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Backup Database (Fase 8)</span>
                 </template>
             </nav>

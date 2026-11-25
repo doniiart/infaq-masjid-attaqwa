@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ExpenseTransactionController;
 use App\Http\Controllers\IncomeTransactionController;
 use App\Http\Controllers\OpeningBalanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicDashboardController;
 use App\Http\Controllers\TransactionAttachmentController;
+use App\Http\Controllers\TransactionHistoryController;
 use App\Services\FinancialSummaryService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +22,7 @@ Route::middleware(['auth', 'active'])->group(function () {
         ]);
     })->name('dashboard');
 
-    // Saldo Awal (Dilihat semua pengurus, diubah hanya Super Admin)
+    // Saldo Awal
     Route::get('/opening-balances', [OpeningBalanceController::class, 'index'])->name('opening-balances.index');
     Route::post('/opening-balances', [OpeningBalanceController::class, 'store'])
         ->middleware('role:super_admin')
@@ -36,6 +38,15 @@ Route::middleware(['auth', 'active'])->group(function () {
     // Pengeluaran Pembangunan
     Route::get('/expenses', [ExpenseTransactionController::class, 'index'])->name('expenses.index');
     Route::post('/expenses', [ExpenseTransactionController::class, 'store'])->name('expenses.store');
+
+    // Riwayat Transaksi & Pembatalan
+    Route::get('/transactions', [TransactionHistoryController::class, 'index'])->name('transactions.index');
+    Route::post('/transactions/{transaction}/cancel', [TransactionHistoryController::class, 'cancel'])->name('transactions.cancel');
+
+    // Log Aktivitas Audit (Khusus Super Admin)
+    Route::get('/activity-logs', [ActivityLogController::class, 'index'])
+        ->middleware('role:super_admin')
+        ->name('activity-logs.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
