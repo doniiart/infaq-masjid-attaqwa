@@ -88,7 +88,13 @@ const sidebarOpen = ref(false);
                 <div class="pt-4 pb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Pembangunan
                 </div>
-                <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Dokumentasi & Progres (Fase 6)</span>
+                <Link
+                    :href="route('construction.index')"
+                    :class="route().current('construction.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    class="flex items-center px-3 py-2.5 rounded-lg transition"
+                >
+                    Dokumentasi & Progres
+                </Link>
 
                 <template v-if="isSuperAdmin">
                     <div class="pt-4 pb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">

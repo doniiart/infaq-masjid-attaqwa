@@ -12,6 +12,7 @@ use App\Services\FinancialSummaryService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\FinancialReportController;
+use App\Http\Controllers\ConstructionProgressController;
 
 Route::get('/', [PublicDashboardController::class, 'index'])->name('home');
 Route::get('/attachments/{attachment}', [TransactionAttachmentController::class, 'show'])->name('attachments.show');
@@ -55,6 +56,17 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Laporan Keuangan PDF
     Route::get('/reports', [FinancialReportController::class, 'index'])->name('reports.index');
+
+    // Dokumentasi & Progres Pembangunan
+    Route::get('/construction', [ConstructionProgressController::class, 'index'])->name('construction.index');
+    Route::post('/construction/stages', [ConstructionProgressController::class, 'storeStage'])->name('construction.stages.store');
+    Route::put('/construction/stages/{stage}', [ConstructionProgressController::class, 'updateStage'])->name('construction.stages.update');
+    Route::delete('/construction/stages/{stage}', [ConstructionProgressController::class, 'destroyStage'])->name('construction.stages.destroy');
+
+    Route::post('/construction/documents', [ConstructionProgressController::class, 'storeDocument'])->name('construction.documents.store');
+    Route::post('/construction/documents/{document}/update', [ConstructionProgressController::class, 'updateDocument'])->name('construction.documents.update');
+    Route::delete('/construction/photos/{photo}', [ConstructionProgressController::class, 'destroyPhoto'])->name('construction.photos.destroy');
+    Route::delete('/construction/documents/{document}', [ConstructionProgressController::class, 'destroyDocument'])->name('construction.documents.destroy');
 });
 
 require __DIR__.'/auth.php';
