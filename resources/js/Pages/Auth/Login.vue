@@ -38,7 +38,7 @@ const submit = () => {
                 Masuk ke Sistem
             </h2>
             <p class="text-sm text-slate-500 mt-1">
-                Silakan masuk menggunakan akun pengurus yang telah didaftarkan oleh Super Admin.
+                Silakan masuk menggunakan akun pengurus yang telah didaftarkan oleh Ketua Takmir.
             </p>
         </div>
 

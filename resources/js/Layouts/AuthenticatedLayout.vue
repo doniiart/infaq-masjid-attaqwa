@@ -32,7 +32,7 @@ const sidebarOpen = ref(false);
                 <div class="min-w-0">
                     <p class="font-bold text-sm text-[#008B45] truncate">{{ mosque?.name || 'Masjid At-Taqwa' }}</p>
                     <span class="inline-block text-[11px] font-semibold px-2 py-0.5 rounded bg-emerald-50 text-[#008B45] uppercase">
-                        {{ isSuperAdmin ? 'Super Admin' : 'Admin Takmir' }}
+                        {{ isSuperAdmin ? 'Ketua Takmir' : 'Jamaah' }}
                     </span>
                 </div>
             </div>

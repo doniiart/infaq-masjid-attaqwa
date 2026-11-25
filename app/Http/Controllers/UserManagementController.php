@@ -104,7 +104,7 @@ class UserManagementController extends Controller
 
         if ($currentUser->id === $user->id && $validated['role'] !== 'super_admin') {
             throw ValidationException::withMessages([
-                'role' => 'Anda tidak dapat menurunkan peran Super Admin milik Anda sendiri.',
+                'role' => 'Anda tidak dapat menurunkan peran Ketua Takmir milik Anda sendiri.',
             ]);
         }
 
@@ -116,7 +116,7 @@ class UserManagementController extends Controller
 
         if ($willLeaveNoActiveSuperAdmin) {
             throw ValidationException::withMessages([
-                'role' => 'Sistem harus memiliki minimal satu Super Admin yang aktif.',
+                'role' => 'Sistem harus memiliki minimal satu Ketua Takmir yang aktif.',
             ]);
         }
 
@@ -174,7 +174,7 @@ class UserManagementController extends Controller
             $activeSuperAdmins = User::where('role', 'super_admin')->where('is_active', true)->count();
             if ($activeSuperAdmins <= 1) {
                 throw ValidationException::withMessages([
-                    'status' => 'Sistem harus memiliki minimal satu Super Admin aktif.',
+                    'status' => 'Sistem harus memiliki minimal satu Ketua Takmir aktif.',
                 ]);
             }
         }

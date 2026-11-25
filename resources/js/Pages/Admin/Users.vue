@@ -83,7 +83,7 @@ const toggleUserStatus = (user) => {
             <div class="bg-white rounded-xl border border-slate-200 p-6">
                 <h3 class="font-bold text-slate-900">Tambah Akun Pengurus Baru</h3>
                 <p class="text-xs text-slate-500 mt-0.5 mb-5">
-                    Pendaftaran publik dinonaktifkan demi keamanan. Hanya Super Admin yang dapat membuat akun Admin atau Super Admin baru.
+                    Pendaftaran publik dinonaktifkan demi keamanan. Hanya Ketua Takmir yang dapat membuat akun Admin atau Super Admin baru.
                 </p>
 
                 <form @submit.prevent="submitCreate" class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -117,8 +117,8 @@ const toggleUserStatus = (user) => {
                             v-model="createForm.role"
                             class="w-full rounded-lg border-slate-300 text-sm focus:border-[#008B45] focus:ring-[#008B45]"
                         >
-                            <option value="admin">Admin (Bendahara / Panitia)</option>
-                            <option value="super_admin">Super Admin (Akses Penuh)</option>
+                            <option value="admin">Jamaah (Bendahara / Panitia)</option>
+                            <option value="super_admin">Ketua Takmir (Akses Penuh)</option>
                         </select>
                         <p v-if="createForm.errors.role" class="text-xs text-red-600 mt-1">{{ createForm.errors.role }}</p>
                     </div>
@@ -197,7 +197,7 @@ const toggleUserStatus = (user) => {
                                         :class="u.role === 'super_admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'"
                                         class="px-2.5 py-0.5 rounded-full text-xs font-semibold"
                                     >
-                                        {{ u.role === 'super_admin' ? 'Super Admin' : 'Admin' }}
+                                        {{ u.role === 'super_admin' ? 'Ketua Takmir' : 'Jamaah' }}
                                     </span>
                                 </td>
                                 <td class="px-5 py-3.5 text-center">
@@ -257,8 +257,8 @@ const toggleUserStatus = (user) => {
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Peran (Role) *</label>
                         <select v-model="editForm.role" class="w-full rounded-lg border-slate-300 text-sm">
-                            <option value="admin">Admin</option>
-                            <option value="super_admin">Super Admin</option>
+                            <option value="admin">Jamaah</option>
+                            <option value="super_admin">Ketua Takmir</option>
                         </select>
                         <p v-if="editForm.errors.role" class="text-xs text-red-600 mt-1">{{ editForm.errors.role }}</p>
                     </div>
