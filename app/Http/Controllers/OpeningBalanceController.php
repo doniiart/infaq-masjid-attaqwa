@@ -74,33 +74,29 @@ class OpeningBalanceController extends Controller
 
     public function update(Request $request, OpeningBalance $openingBalance): RedirectResponse
     {
-        if (! $request->user()->isSuperAdmin()) {
-            abort(403, 'Hanya Super Admin yang dapat mengubah saldo awal.');
-        }
-
         $validated = $request->validate([
-            'amount' => ['required', 'numeric', 'min:0', 'max:999999999999.99'],
+            'amount' => ['required', 'numeric', 'min:0'],
             'recorded_date' => ['required', 'date'],
-            'notes' => ['nullable', 'string', 'max:1000'],
+            'description' => ['nullable', 'string', 'max:500'],
         ], [
             'amount.required' => 'Nominal saldo awal wajib diisi.',
+            'amount.numeric' => 'Nominal saldo awal harus berupa angka.',
             'amount.min' => 'Nominal saldo awal tidak boleh negatif.',
             'recorded_date.required' => 'Tanggal pencatatan wajib diisi.',
         ]);
 
-        DB::transaction(function () use ($validated, $request, $openingBalance) {
+        DB::transaction(function () use ($validated, $openingBalance) {
             $oldValues = $openingBalance->toArray();
 
             $openingBalance->update([
                 'amount' => $validated['amount'],
                 'recorded_date' => $validated['recorded_date'],
-                'notes' => $validated['notes'] ?? null,
-                'updated_by' => $request->user()->id,
+                'description' => $validated['description'] ?? null,
             ]);
 
             AuditLogger::log(
                 'opening_balance.updated',
-                "Memperbarui saldo awal (#{$openingBalance->id}) menjadi Rp " . number_format((float) $openingBalance->amount, 0, ',', '.'),
+                'Memperbarui catatan saldo awal menjadi Rp ' . number_format((float) $openingBalance->amount, 0, ',', '.'),
                 $openingBalance,
                 $oldValues,
                 $openingBalance->fresh()->toArray()
@@ -108,6 +104,6 @@ class OpeningBalanceController extends Controller
         });
 
         return redirect()->route('opening-balances.index')
-            ->with('success', 'Perubahan saldo awal berhasil disimpan.');
+            ->with('success', 'Catatan saldo awal berhasil diperbarui dan dicatat dalam log aktivitas.');
     }
 }
