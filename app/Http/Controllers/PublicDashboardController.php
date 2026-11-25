@@ -69,7 +69,7 @@ class PublicDashboardController extends Controller
                     'attachments' => $tx->attachments->map(fn ($att) => [
                         'id' => $att->id,
                         'file_name' => $att->file_name,
-                        'url' => asset('storage/' . ltrim($att->file_path, '/')),
+                        'url' => route('attachments.show', $att->id),
                     ]),
                 ];
             });

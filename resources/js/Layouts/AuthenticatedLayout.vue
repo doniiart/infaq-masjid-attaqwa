@@ -49,11 +49,41 @@ const sidebarOpen = ref(false);
                 <div class="pt-4 pb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Keuangan & Laporan
                 </div>
-                <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Saldo Awal (Fase 4)</span>
-                <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Pemasukan Infaq (Fase 4)</span>
-                <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Pengeluaran (Fase 4)</span>
-                <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Riwayat Transaksi (Fase 4)</span>
-                <span class="block px-3 py-2 text-slate-400 cursor-not-allowed">Laporan PDF (Fase 5)</span>
+                <Link
+                    :href="route('opening-balances.index')"
+                    :class="route().current('opening-balances.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    class="flex items-center px-3 py-2.5 rounded-lg transition"
+                >
+                    Saldo Awal
+                </Link>
+                <Link
+                    :href="route('incomes.index')"
+                    :class="route().current('incomes.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    class="flex items-center px-3 py-2.5 rounded-lg transition"
+                >
+                    Pemasukan Infaq
+                </Link>
+                <Link
+                    :href="route('expenses.index')"
+                    :class="route().current('expenses.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    class="flex items-center px-3 py-2.5 rounded-lg transition"
+                >
+                    Pengeluaran
+                </Link>
+                <Link
+                    :href="route('transactions.index')"
+                    :class="route().current('transactions.*') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    class="flex items-center px-3 py-2.5 rounded-lg transition"
+                >
+                    Riwayat Transaksi
+                </Link>
+                <Link
+                    :href="route('reports.pdf')"
+                    :class="route().current('reports.pdf') ? 'bg-[#008B45] text-white' : 'text-slate-700 hover:bg-emerald-50 hover:text-[#008B45]'"
+                    class="flex items-center px-3 py-2.5 rounded-lg transition"
+                >
+                    Laporan PDF
+                </Link>
 
                 <div class="pt-4 pb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Pembangunan
