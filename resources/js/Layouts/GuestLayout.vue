@@ -6,11 +6,9 @@ import { Link } from '@inertiajs/vue3';
     <div class="min-h-screen bg-slate-50 flex flex-col lg:flex-row">
         <!-- Panel Kiri: Branding & Informasi Masjid At-Taqwa (Tampil di Desktop) -->
         <div class="hidden lg:flex lg:w-1/2 xl:w-[54%] bg-gradient-to-br from-[#005e2e] via-[#008B45] to-[#00a352] text-white p-12 flex-col justify-between relative overflow-hidden">
-            <!-- Ornamen Geometris Halus -->
             <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 pointer-events-none"></div>
             <div class="absolute -bottom-32 -left-24 w-[28rem] h-[28rem] rounded-full bg-black/10 pointer-events-none"></div>
 
-            <!-- Header Branding -->
             <div class="relative z-10">
                 <Link :href="route('home')" class="inline-flex items-center gap-3.5 group">
                     <div class="w-14 h-14 rounded-2xl bg-white p-2 shadow-lg flex items-center justify-center transition-transform group-hover:scale-105">
@@ -31,7 +29,6 @@ import { Link } from '@inertiajs/vue3';
                 </Link>
             </div>
 
-            <!-- Konten Utama Panel Kiri -->
             <div class="relative z-10 max-w-lg space-y-6 my-auto py-8">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-xs font-medium text-emerald-50">
                     <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
@@ -46,7 +43,6 @@ import { Link } from '@inertiajs/vue3';
                     Candi Rejo, RT 23 RW 09, Jelobo, Wonosari, Klaten, Jawa Tengah 57473.
                 </p>
 
-                <!-- 3 Pilar Sistem -->
                 <div class="space-y-3.5 pt-2">
                     <div class="flex items-start gap-3">
                         <div class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
@@ -86,7 +82,6 @@ import { Link } from '@inertiajs/vue3';
                 </div>
             </div>
 
-            <!-- Footer Panel Kiri -->
             <div class="relative z-10 flex items-center justify-between text-xs text-emerald-200 border-t border-white/15 pt-5">
                 <span>&copy; {{ new Date().getFullYear() }} Takmir & Panitia Pembangunan Masjid At-Taqwa</span>
                 <Link :href="route('home')" class="font-semibold text-white hover:underline">
@@ -95,38 +90,49 @@ import { Link } from '@inertiajs/vue3';
             </div>
         </div>
 
-        <!-- Panel Kanan: Form Autentikasi -->
-        <div class="flex-1 flex flex-col justify-between p-6 sm:p-10 lg:p-12 bg-white lg:bg-slate-50">
-            <!-- Header Mobile (Hanya tampil di layar kecil/HP) -->
-            <div class="lg:hidden flex items-center justify-between pb-6 border-b border-slate-100">
-                <Link :href="route('home')" class="flex items-center gap-3">
-                    <img
-                        src="/images/logo-masjid-attaqwa.png"
-                        alt="Logo Masjid At-Taqwa"
-                        class="w-10 h-10 object-contain"
-                    />
-                    <div>
-                        <span class="block text-sm font-bold text-slate-900">Masjid At-Taqwa</span>
-                        <span class="block text-[11px] text-[#008B45] font-medium">Infaq Pembangunan</span>
-                    </div>
-                </Link>
-                <Link
-                    :href="route('home')"
-                    class="text-xs font-semibold text-[#008B45] hover:text-[#007037] bg-emerald-50 px-3 py-1.5 rounded-lg"
-                >
-                    Beranda Publik
-                </Link>
+        <!-- Panel Kanan: Header Mobile Hijau + Form Autentikasi -->
+        <div class="flex-1 flex flex-col justify-between bg-slate-50">
+            <!-- Header Banner Mobile (Tampil di layar HP/Tablet) -->
+            <div class="lg:hidden bg-gradient-to-br from-[#005e2e] via-[#008B45] to-[#00a352] text-white px-5 pt-6 pb-14 rounded-b-3xl shadow-md relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-white/10 pointer-events-none"></div>
+
+                <div class="relative z-10 flex items-center justify-between gap-3">
+                    <Link :href="route('home')" class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-white p-1.5 shadow flex items-center justify-center shrink-0">
+                            <img
+                                src="/images/logo-masjid-attaqwa.png"
+                                alt="Logo Masjid At-Taqwa"
+                                class="w-full h-full object-contain"
+                            />
+                        </div>
+                        <div>
+                            <span class="block text-sm font-bold text-white leading-tight">Masjid At-Taqwa</span>
+                            <span class="block text-[11px] text-emerald-100 font-medium">Infaq Pembangunan</span>
+                        </div>
+                    </Link>
+
+                    <Link
+                        :href="route('home')"
+                        class="text-xs font-semibold text-white bg-white/15 hover:bg-white/25 backdrop-blur-sm px-3 py-1.5 rounded-lg transition shrink-0"
+                    >
+                        Beranda Publik
+                    </Link>
+                </div>
+
+                <p class="relative z-10 text-xs text-emerald-100 mt-4 leading-relaxed">
+                    Portal Pengurus &bull; Candi Rejo, Jelobo, Wonosari, Klaten.
+                </p>
             </div>
 
             <!-- Kontainer Form Tengah -->
-            <div class="w-full max-w-md mx-auto my-auto py-8">
-                <div class="bg-white lg:p-8 lg:rounded-2xl lg:border lg:border-slate-200/80 lg:shadow-sm">
+            <div class="w-full max-w-md mx-auto px-4 sm:px-6 -mt-8 lg:my-auto lg:py-8 lg:px-0 relative z-20">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-md lg:shadow-sm">
                     <slot />
                 </div>
             </div>
 
             <!-- Footer Bawah -->
-            <div class="text-center text-xs text-slate-400 pt-4">
+            <div class="text-center text-xs text-slate-400 py-6 px-4">
                 Sistem Informasi Pengelolaan Infaq Pembangunan Masjid At-Taqwa
             </div>
         </div>
