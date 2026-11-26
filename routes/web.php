@@ -16,6 +16,9 @@ use App\Http\Controllers\ConstructionProgressController;
 use App\Http\Controllers\MosqueSettingController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\DatabaseBackupController;
+use App\Models\Transaction;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 
 Route::get('/', [PublicDashboardController::class, 'index'])->name('home');
 Route::get('/attachments/{attachment}', [TransactionAttachmentController::class, 'show'])->name('attachments.show');
@@ -23,8 +26,31 @@ Route::get('/reports/pdf', [FinancialReportController::class, 'downloadPdf'])->n
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/dashboard', function (FinancialSummaryService $financialService) {
+        $dateColumn = Schema::hasColumn('transactions', 'transaction_date')
+            ? 'transaction_date'
+            : (Schema::hasColumn('transactions', 'date') ? 'date' : 'created_at');
+
+        $monthlyIncomeChart = collect(range(5, 0))->map(function (int $monthsAgo) use ($dateColumn) {
+            $monthDate = Carbon::now()->subMonths($monthsAgo);
+            $start = $monthDate->copy()->startOfMonth()->toDateString();
+            $end = $monthDate->copy()->endOfMonth()->toDateString();
+
+            $query = Transaction::where('type', 'income')
+                ->where('status', 'verified')
+                ->whereDate($dateColumn, '>=', $start)
+                ->whereDate($dateColumn, '<=', $end);
+
+            return [
+                'month' => $monthDate->translatedFormat('M Y'),
+                'short_month' => $monthDate->translatedFormat('M'),
+                'total' => (float) $query->sum('amount'),
+                'count' => (int) $query->count(),
+            ];
+        })->values();
+
         return Inertia::render('Dashboard', [
             'summary' => $financialService->getSummary(),
+            'monthlyIncomeChart' => $monthlyIncomeChart,
         ]);
     })->name('dashboard');
 
